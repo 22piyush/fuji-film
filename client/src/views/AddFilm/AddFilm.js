@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import "./AddFilm.css";
 import Input from "../../components/Inputs/Inputs";
+import Button from "../../components/Button/Button";
+import axios from 'axios';
+import toast,{Toaster} from "react-hot-toast";
 
 function AddFilm() {
   const [film, setFilm] = useState({
@@ -14,6 +17,31 @@ function AddFilm() {
     rating: "",
   });
 
+  const addFilms = async() => {
+    const response =  await axios.post(`${process.env.REACT_APP_API_URL}/films`,{
+      title: film.title,
+      shortDescription:film.shortDescription,
+      director:film.director,
+      poster:film.poster,
+      releaseYear:film.releaseYear,
+      category:film.category,
+      language:film.language,
+      rating:film.rating,
+    });
+    toast.success(response.data.message);
+
+    setFilm({
+      title: "",
+      shortDescription: "",
+      director: "",
+      poster: "",
+      releaseYear: "",
+      category: "",
+      language: "",
+      rating: "",
+    });
+};
+  
   return (
     <div>
       <h1>Add Film</h1>
@@ -22,7 +50,7 @@ function AddFilm() {
         <Input
           label="Title"
           value={film.title}
-          onChange={(val) => {
+          setValue={(val) => {
             setFilm({ ...film, title: val });
           }}
           placeholder={"Enter The Title Of Your Film"}
@@ -31,7 +59,7 @@ function AddFilm() {
         <Input
           label="Short Description"
           value={film.shortDescription}
-          onChange={(val) => {
+          setValue={(val) => {
             setFilm({ ...film, shortDescription: val });
           }}
           placeholder={"Enter Short Description"}
@@ -40,7 +68,7 @@ function AddFilm() {
         <Input
           label="Director"
           value={film.director}
-          onChange={(val) => {
+          setValue={(val) => {
             setFilm({ ...film, director: val });
           }}
           placeholder={"Enter director of your film"}
@@ -49,7 +77,7 @@ function AddFilm() {
         <Input
           label="Poster"
           value={film.poster}
-          onChange={(val) => {
+          setValue={(val) => {
             setFilm({ ...film, poster: val });
           }}
           placeholder={"Enter the URL of the poster"}
@@ -58,7 +86,7 @@ function AddFilm() {
         <Input
           label="Release Year"
           value={film.releaseYear}
-          onChange={(val) => {
+          setValue={(val) => {
             setFilm({ ...film, releaseYear: val });
           }}
           placeholder={"Enter the release year of the film"}
@@ -67,7 +95,7 @@ function AddFilm() {
         <Input
           label="category"
           value={film.category}
-          onChange={(val) => {
+          setValue={(val) => {
             setFilm({ ...film, category: val });
           }}
           placeholder={"Enter the category of the film"}
@@ -76,7 +104,7 @@ function AddFilm() {
         <Input
           label="language"
           value={film.language}
-          onChange={(val) => {
+          setValue={(val) => {
             setFilm({ ...film, language: val });
           }}
           placeholder={"Enter the language"}
@@ -85,11 +113,17 @@ function AddFilm() {
         <Input
           label="Rating"
           value={film.rating}
-          onChange={(val) => {
+          setValue={(val) => {
             setFilm({ ...film, rating: val });
           }}
           placeholder={"Enter The Rating"}
         />
+                   
+              <Button 
+              title="Add Film"
+              onClick={()=>{addFilms()}}
+              variant="primary"
+              />
       </div>
     </div>
   );

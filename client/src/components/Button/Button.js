@@ -1,10 +1,9 @@
 import React from 'react'
+import "./Button.css"
 
-function Button() {
+function Button({title,onClick,variant}) {
   return (
-    <div>
-        
-    </div>
+   <button onClick={onClick} className={`buton-form ${variant}`}>{title}</button>
   )
 }
 
