@@ -1,3 +1,26 @@
 .film-card{
-    border: 1px solid black;
+    border: 1px solid black;   
+    padding: 10px;
+    margin: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(red, green, blue, alpha);
+    display: flex;
+}
+.film-card-poster{
+    width: 150px;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+    margin: 0 auto;
+
+}
+p{
+   line-height: 2px;
+}
+.film-card-info{
+    margin-left: 20px;
+}
+.delete-btn{
+margin-right: 0px;
+display: block;
 }

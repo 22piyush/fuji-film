@@ -3,7 +3,7 @@ import "./AddFilm.css";
 import Input from "../../components/Inputs/Inputs";
 import Button from "../../components/Button/Button";
 import axios from 'axios';
-import toast,{Toaster} from "react-hot-toast";
+import toast from "react-hot-toast";
 
 function AddFilm() {
   const [film, setFilm] = useState({
@@ -28,7 +28,7 @@ function AddFilm() {
       language:film.language,
       rating:film.rating,
     });
-    toast.success(response.data.message);
+   
 
     setFilm({
       title: "",
@@ -40,6 +40,7 @@ function AddFilm() {
       language: "",
       rating: "",
     });
+    toast.success(response.data.message);
 };
   
   return (
